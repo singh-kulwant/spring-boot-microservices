@@ -1,4 +1,4 @@
-package com.ks.moviecatalougeservice;
+package com.mcs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
