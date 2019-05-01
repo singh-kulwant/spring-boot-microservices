@@ -1,4 +1,4 @@
-package com.rds.resorces;
+package com.mcs.models;
 
 
 public class Rating {

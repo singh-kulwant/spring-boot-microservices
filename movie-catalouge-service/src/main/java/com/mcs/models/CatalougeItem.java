@@ -1,4 +1,5 @@
-package com.mcs.resources;
+package com.mcs.models;
+
 
 public class CatalougeItem {
 
