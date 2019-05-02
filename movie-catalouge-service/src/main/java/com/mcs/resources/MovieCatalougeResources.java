@@ -31,10 +31,11 @@ public class MovieCatalougeResources {
 	public List<CatalougeItem> getCatalouge(@PathVariable("userId") String userId) {
 
 		/* Get all movie Ids */
-		UserRating ratings = restTemplate.getForObject("http://http://localhost:9092/ratings/users/" + userId, UserRating.class);
+		UserRating ratings = restTemplate.getForObject("http://localhost:9092/ratings/users/" + userId, UserRating.class);
 
 		return ratings.getUserRating().stream().map(rating -> {
 
+			// for each movie id, call movie info service and get details
 			Movie movie = restTemplate.getForObject("http://localhost:9090/movies/" + rating.getMovieId(), Movie.class);
 
 			/*
@@ -43,14 +44,12 @@ public class MovieCatalougeResources {
 			 * Movie movie = webClient.build() .get() .uri("http://localhost:9090/movies/" +
 			 * rating.getMovieId()) .retrieve() .bodyToMono(Movie.class) .block();
 			 */
+			
+			// put them all together
 			return new CatalougeItem(movie.getName(), "Default movie desc", rating.getRating());
 		}).collect(Collectors.toList());
 
-		// for each movie id, call movie info service and get details
-
-		// put them all together
-
-		// return Collections.singletonList(new CatalougeItem("Shutter Island", "fav
-		// movie", 4));
+		
+	
 	}
 }
