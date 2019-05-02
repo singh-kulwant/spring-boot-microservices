@@ -1,5 +1,6 @@
 package com.mcs.resources;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.mcs.models.CatalougeItem;
 import com.mcs.models.Movie;
 import com.mcs.models.Rating;
+import com.mcs.models.UserRating;
 
 @RestController
 @RequestMapping("/catalog")
@@ -29,11 +31,9 @@ public class MovieCatalougeResources {
 	public List<CatalougeItem> getCatalouge(@PathVariable("userId") String userId) {
 
 		/* Get all movie Ids */
-		List<Rating> ratings = new ArrayList<Rating>();
-		ratings.add(new Rating("001", 3));
-		ratings.add(new Rating("002", 4));
+		UserRating ratings = restTemplate.getForObject("http://http://localhost:9092/ratings/users/" + userId, UserRating.class);
 
-		return ratings.stream().map(rating -> {
+		return ratings.getUserRating().stream().map(rating -> {
 
 			Movie movie = restTemplate.getForObject("http://localhost:9090/movies/" + rating.getMovieId(), Movie.class);
 
