@@ -1,11 +1,10 @@
 package com.mcs.resources;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +13,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.mcs.models.CatalougeItem;
 import com.mcs.models.Movie;
-import com.mcs.models.Rating;
 import com.mcs.models.UserRating;
 
 @RestController
@@ -26,17 +24,20 @@ public class MovieCatalougeResources {
 
 	@Autowired
 	private WebClient.Builder webClient;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
 
 	@RequestMapping("/{userId}")
 	public List<CatalougeItem> getCatalouge(@PathVariable("userId") String userId) {
 
 		/* Get all movie Ids */
-		UserRating ratings = restTemplate.getForObject("http://localhost:9092/ratings/users/" + userId, UserRating.class);
+		UserRating ratings = restTemplate.getForObject("http://rating-data-service/ratings/users/" + userId, UserRating.class);
 
 		return ratings.getUserRating().stream().map(rating -> {
 
 			// for each movie id, call movie info service and get details
-			Movie movie = restTemplate.getForObject("http://localhost:9090/movies/" + rating.getMovieId(), Movie.class);
+			Movie movie = restTemplate.getForObject("http://movie-information-service/movies/" + rating.getMovieId(), Movie.class);
 
 			/*
 			 * Webflux webcient impl
