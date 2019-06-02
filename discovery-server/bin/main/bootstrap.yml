@@ -1,0 +1,10 @@
+#these properties will let discovery server query the config server at startup
+#2E3436
+
+spring:
+  cloud:
+    config:
+      name: discovery
+      uri:  "http://localhost:8888"
+      discovery:
+        enabled: true
