@@ -3,6 +3,7 @@ package com.rds.resorces;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,14 @@ import com.rds.models.UserRating;
 @RequestMapping("/ratings")
 public class RatingDataResorce {
 
+	@Value("${message: Default Hello}")
+	private String message;
+	
+	@RequestMapping("/msg")
+	public String displayMsg() {
+		return message;
+	}
+	
 	@RequestMapping("/{movieId}")
 	public Rating getRating(@PathVariable("movieId") String movieId) {
 		return new Rating(movieId, 4);
