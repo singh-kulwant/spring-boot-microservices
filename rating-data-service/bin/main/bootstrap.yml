@@ -2,14 +2,14 @@
 #2E3436
 
 server:
-  port: 8761
+  port: 9092
   
 spring:
   cloud:
     config:
-      name: discovery
+      name: rds
       uri: http://localhost:8888
       discovery:
         enabled: true
   application:
-    name: discovery
+    name: rds
