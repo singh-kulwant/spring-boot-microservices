@@ -1,6 +1,11 @@
 #these properties will let discovery server query the config server at startup
 #2E3436
 
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
 server:
   port: 8761
   

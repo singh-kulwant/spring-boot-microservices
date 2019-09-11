@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: data
+  jpa:
+    hibernate:
+      ddl-auto: update
