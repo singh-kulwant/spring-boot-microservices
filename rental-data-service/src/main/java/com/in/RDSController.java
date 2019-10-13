@@ -1,5 +1,7 @@
 package com.in;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +26,10 @@ public class RDSController {
 	@RequestMapping(value = "/customer", method = RequestMethod.POST)
 	public Customer save(@RequestBody Customer customer) {
 		return customerService.save(customer);
+	}
+	
+	@RequestMapping(value="/customer", method = RequestMethod.GET)
+	public List<Customer> findAllCust() {
+		return customerService.findAll();
 	}
 }
