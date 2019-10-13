@@ -1,29 +1,27 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.8.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
 	id 'java'
 }
 
-group = 'com.in'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.mis'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
-	
-	flatDir {	dirs 'libs'	}
 }
 
 ext {
-	set('springCloudVersion', "Greenwich.SR2")
+	set('springCloudVersion', 'Greenwich.SR1')
 }
 
 dependencies {
-	//compile (name:'rcc', ext:'jar')
+
 	compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
-		
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

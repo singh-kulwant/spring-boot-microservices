@@ -9,16 +9,19 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    	id 'java'
 }
+
+group = 'com.in'
+version = '1.0'
+
+sourceCompatibility = '1.8'
 
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
-
-group = 'com.in.common'
-version = '0.0.1-SNAPSHOT'
 
 dependencies {
 	compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2' 
